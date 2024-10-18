@@ -2,7 +2,7 @@
 
 import { useLoading } from "@/app/layout";
 import fetchApi from "@/app/utils/api";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -11,7 +11,6 @@ const DetailAuction = () => {
   const searchParams = useSearchParams();
   const { setLoading } = useLoading();
   const id = searchParams.get("id");
-  const [userData, setUserData] = useState(null);
   const [auction, setAuction] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [bidHistory, setBidHistory] = useState([]);
@@ -157,6 +156,29 @@ const DetailAuction = () => {
     }
   };
 
+  const handleAuctionEnd = async () => {
+    try {
+      // Gửi request đến API kết thúc phiên đấu giá
+      const response = await fetchApi(`/room/auction-end`, "POST", { roomId: id });
+
+      // Kiểm tra nếu phản hồi thành công
+      if (response.ok) {
+        const data = await response.json(); // Chuyển đổi phản hồi JSON
+        console.log("Auction ended successfully:", data);
+
+        alert("Phiên đấu giá đã kết thúc thành công!");
+      } else {
+        // Xử lý trường hợp API trả về lỗi nhưng không ném ngoại lệ
+        console.error("Failed to end auction:", response.statusText);
+        alert("Không thể kết thúc phiên đấu giá. Vui lòng thử lại.");
+      }
+    } catch (error) {
+      // Xử lý các lỗi không mong muốn (như mạng, server lỗi)
+      console.error("Error ending auction:", error);
+      alert("Đã xảy ra lỗi khi kết thúc phiên đấu giá. Vui lòng thử lại sau.");
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
       {auction ? (
@@ -205,6 +227,17 @@ const DetailAuction = () => {
                 <span>
                   <strong>Thời gian còn lại:</strong>
                   <span className="text-red-500 text-[14px] text-red-600  ml-[4px]">{remainingEndTime}</span>
+
+                  {auction.user == Cookies.get("userId") && auction.status == "Đang diễn ra" ? (
+                    <Button
+                      style={{
+                        marginLeft: "10px",
+                      }}
+                      onClick={() => handleAuctionEnd()}
+                    >
+                      Kết thúc phiên đấu giá
+                    </Button>
+                  ) : null}
                 </span>
               )}
             </p>
@@ -239,6 +272,21 @@ const DetailAuction = () => {
               >
                 Đặt giá
               </button>
+              {/* <CustomButton
+                onClick={handleBid}
+                className={`mt-4 w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-200 transform hover:scale-105 ${
+                  remainingStartTime !== "" ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={
+                  remainingStartTime !== "" ||
+                  remainingEndTime === "Đã kết thúc" ||
+                  auction.user == Cookies.get("userId") ||
+                  bidAmount === "" ||
+                  Cookies.get("userId") == null
+                }
+              >
+                Đặt giá thầu
+              </CustomButton> */}
             </div>
             <h2 className="text-3xl font-semibold mb-4 text-gray-800">Lịch sử đấu giá</h2>
             <div className="space-y-4">

@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react"; // Sửa lỗi import useState
 import Cookies from "js-cookie";
 import { message } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 const Header = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -80,10 +81,10 @@ const Header = () => {
         <div className="flex justify-around w-full items-center">
           <div className="flex space-x-4">
             <div>
-              Liên Hệ: <span className="font-bold">121</span>
+              Liên Hệ: <span className="font-bold">01234657988</span>
             </div>
             <div>
-              Email: <span className="font-bold">abc@gmail.com</span>
+              Email: <span className="font-bold">TranDaiHung@gmail.com</span>
             </div>
           </div>
 
@@ -93,6 +94,12 @@ const Header = () => {
             </div>
             {fullName ? (
               <div className="flex justify-center mt-[2px]">
+                <div className="ml-4px font-bold text-[14px] text-center mr-[20px]">
+                  Giỏ hàng{" "}
+                  <label className="w-[50px] ">
+                    <ShoppingCartOutlined />
+                  </label>
+                </div>
                 <div className="ml-4px font-bold text-[14px] text-center">{fullName}</div>
                 <div className="ml-4px font-bold text-[14px] text-center ml-[15px] cursor-pointer" onClick={() => handerLogOut()}>
                   Đăng xuất
@@ -116,7 +123,20 @@ const Header = () => {
         </div>
       </div>
       <div className="flex justify-around items-center p-4 shadow-lg">
-        <div className="font-bold">Logo</div> {/* Thêm lớp font-bold */}
+        <div className="font-bold">
+          <Link href={"/"}>
+            <img
+              style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+              src="https://scontent-hkg4-1.xx.fbcdn.net/v/t1.15752-9/462535391_3771330939745233_3099731095223746077_n.png?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFEq_DmVSp78A4AQglB4xlbre-MXs-el_2t74xez56X_eW1eOcL9xWGvBUQmkrW07WgjfDG0Xjt8wLJb1AFwCS7&_nc_ohc=bRwtkI4AZX4Q7kNvgEH3zgD&_nc_zt=23&_nc_ht=scontent-hkg4-1.xx&_nc_gid=A0x8nhjd0ZqykRE1_wVUwxa&oh=03_Q7cD1QFSBA9LTt5GMX6wXvgwMQcDbGmfJsGHB2oS6-oGDCSacg&oe=67398F29"
+            />
+          </Link>
+        </div>{" "}
+        {/* Thêm lớp font-bold */}
         <div className="flex space-x-8 items-center">
           <div className={getItemClass("Giới thiệu")} onClick={() => handleClick("Giới thiệu")}>
             <Link href="/">Giới thiệu</Link>
@@ -128,7 +148,7 @@ const Header = () => {
           <div className={getItemClass("Danh mục tài sản")} onClick={() => handleClick("Danh mục tài sản")}>
             <Link href={`\asset-portfolio`}>Danh mục tài sản</Link>
           </div>
-          <div className={getItemClass("Thông báo đấu giá")} onClick={() => handleClick("Nạp tiền vào tài khoản")}>
+          <div className={getItemClass("Nạp tiền vào tài khoản")} onClick={() => handleClick("Nạp tiền vào tài khoản")}>
             <Link href={`\pay`}>Nạp tiền vào tài khoản</Link>
           </div>
           <div className={getItemClass("Kết quả đấu giá")} onClick={() => handleClick("Kết quả đấu giá")}>

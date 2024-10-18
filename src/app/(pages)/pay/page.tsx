@@ -27,7 +27,7 @@ const Pay = () => {
     fetchUserData();
   }, []);
 
-  const formatCurrency = (value) => {
+  const formatCurrency = (value: any) => {
     if (!value) return "";
     // Chuyển đổi giá trị thành số và định dạng thành chuỗi VNĐ
     return Number(value).toLocaleString("vi-VN", { style: "currency", currency: "VND" }).replace("₫", "").trim();

@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { Button } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-const CustomButton = () => {
+const CustomButton = ({ onClick, className, disabled, children }) => {
   const buttonRef = useRef(null); // Initialize buttonRef
 
   const handleConfetti = () => {
@@ -18,12 +18,13 @@ const CustomButton = () => {
   return (
     <Button
       ref={buttonRef}
-      disableRipple
-      className="relative overflow-visible rounded-full hover:-translate-y-1 px-12 shadow-xl bg-background/30 after:content-[''] after:absolute after:rounded-full after:inset-0 after:bg-background/40 after:z-[-1] after:transition after:!duration-500 hover:after:scale-150 hover:after:opacity-0"
-      size="lg"
       onPress={handleConfetti}
+      className={`inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out ${
+        disabled ? "opacity-50 cursor-not-allowed" : ""
+      } ${className}`}
+      disabled={disabled}
     >
-      Press me
+      {children}
     </Button>
   );
 };

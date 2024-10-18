@@ -103,7 +103,7 @@ const Signup = () => {
     console.log("Signup successful:", response);
   };
 
-  const handleChangeVerifyEmail = (value) => {
+  const handleChangeVerifyEmail = (value: any) => {
     setOtp(value.toUpperCase()); // Cập nhật giá trị OTP
   };
 
