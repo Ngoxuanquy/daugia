@@ -1,4 +1,3 @@
-import CustomButton from "@/app/components/button/button";
 import Card from "@/app/components/card/card";
 import React from "react";
 
@@ -141,7 +140,6 @@ function HomePage() {
           ))}
         </div>
       </div>
-      <CustomButton />
     </div>
   );
 }

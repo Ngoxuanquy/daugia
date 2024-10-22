@@ -96,21 +96,21 @@ const AuctionResults = () => {
         </div>
       </div>
 
-      <table className="min-w-full bg-white border border-gray-200">
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
         <thead className="bg-[#5A5C66] text-white">
           <tr>
-            <th className="px-4 py-2 border-b text-left">Tên tài sản</th>
-            <th className="px-4 py-2 border-b text-left">Mã tài sản</th>
-            <th className="px-4 py-2 border-b text-left">Bắt đầu - Kết thúc</th>
-            <th className="px-4 py-2 border-b text-left">Người trúng</th>
-            <th className="px-4 py-2 border-b text-left">Kết quả</th>
-            <th className="px-4 py-2 border-b text-left">Giá trúng</th>
-            <th className="px-4 py-2 border-b text-left">Ghi chú</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Tên tài sản</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Mã tài sản</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Bắt đầu - Kết thúc</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Người trúng</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Kết quả</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Giá trúng</th>
+            <th className="px-4 py-3 border-b text-left font-semibold">Ghi chú</th>
           </tr>
         </thead>
         <tbody>
           {filteredAuctions.map((auction, index) => (
-            <tr key={index} className="hover:bg-gray-100">
+            <tr key={index} className="hover:bg-gray-100 transition-colors duration-200">
               <td className="border-b px-4 py-2">{auction.title}</td>
               <td className="border-b px-4 py-2">{auction.roomCode}</td>
               <td className="border-b px-4 py-2">
@@ -127,7 +127,10 @@ const AuctionResults = () => {
                 })}
               </td>
               <td className="border-b px-4 py-2">{auction.highestBidder}</td>
-              <td className="border-b px-4 py-2">{auction.status}</td>
+              <td class="bg-green-500 text-white text-center rounded-lg w-32 h-9 mt-1 flex items-center justify-center">
+                {auction.status}
+              </td>
+
               <td className="border-b px-4 py-2">{auction.currentPrice} VNĐ</td>
               <td className="border-b px-4 py-2">{auction.notes || "-"}</td>
             </tr>

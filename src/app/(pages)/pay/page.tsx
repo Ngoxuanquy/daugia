@@ -10,20 +10,19 @@ const Pay = () => {
   const [userInfo, setUserInfo] = useState({
     moneys: 0, // Thêm trường tiền
   });
+  const fetchUserData = async () => {
+    const userId = Cookies.get("userId");
+    const userResponse = await fetchApi(`/auth/getUser/${userId}`, "GET");
+
+    console.log({ userResponse });
+
+    // Kiểm tra phản hồi và thiết lập thông tin người dùng
+    if (userResponse && userResponse.metadata) {
+      const { moneys } = userResponse.metadata;
+      setUserInfo({ moneys });
+    }
+  };
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userId = Cookies.get("userId");
-      const userResponse = await fetchApi(`/auth/getUser/${userId}`, "GET");
-
-      console.log({ userResponse });
-
-      // Kiểm tra phản hồi và thiết lập thông tin người dùng
-      if (userResponse && userResponse.metadata) {
-        const { moneys } = userResponse.metadata;
-        setUserInfo({ moneys });
-      }
-    };
-
     fetchUserData();
   }, []);
 
@@ -33,7 +32,7 @@ const Pay = () => {
     return Number(value).toLocaleString("vi-VN", { style: "currency", currency: "VND" }).replace("₫", "").trim();
   };
 
-  const handleAmountChange = (e) => {
+  const handleAmountChange = (e: any) => {
     const rawValue = e.target.value;
     // Giữ lại các ký tự số và dấu phẩy
     const numericValue = rawValue.replace(/[^0-9]/g, ""); // Chỉ giữ số
@@ -46,7 +45,9 @@ const Pay = () => {
 
   // Hàm xử lý khi người dùng nhấn nút nạp tiền
   const handlePayment = async () => {
-    if (!amount || isNaN(amount) || amount <= 0) {
+    const parsedAmount = parseFloat(amount); // or use Number(amount)
+
+    if (!parsedAmount || isNaN(parsedAmount) || parsedAmount <= 0) {
       alert("Vui lòng nhập số tiền hợp lệ.");
       return;
     }
@@ -73,7 +74,10 @@ const Pay = () => {
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md mt-[-200px]">
         <h2 className="text-2xl font-semibold text-center mb-4">Nạp tiền vào tài khoản</h2>
         <label className="block text-gray-700 mb-4 text-center">
-          Số tiền hiện có: <span className="font-semibold text-green-600">{userInfo.moneys} đ</span>
+          Số tiền hiện có:{" "}
+          <span className="font-semibold text-green-600">
+            {userInfo.moneys.toLocaleString("vi-VN", { style: "currency", currency: "VND" })}
+          </span>
         </label>
         <label className="block text-gray-700 mb-2">Nhập số tiền muốn nạp:</label>
         <input

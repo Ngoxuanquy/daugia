@@ -34,7 +34,15 @@ const AuctionRoom = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-6 m-[10px]">
+      <div className="p-10">
+        <div className="text-gray-800 mb-3">
+          <div className="text-sm">Trang chủ / Phòng đấu giá</div>
+        </div>
+        <div>
+          <h1 className="text-bold text-4xl mt-10 ">Phòng đấu giá</h1>
+        </div>
+      </div>
+      <div className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
         {/* Vòng lặp qua các item trong listAuction và truyền từng item vào CardAuction */}
         {listAuction.length > 0 ? (
           listAuction.map((auction, index) => <CardAuction key={index} auction={auction} />)

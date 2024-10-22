@@ -141,27 +141,26 @@ const Header = () => {
           <div className={getItemClass("Giới thiệu")} onClick={() => handleClick("Giới thiệu")}>
             <Link href="/">Giới thiệu</Link>
           </div>
-          {/* Thêm lớp font-bold */}
           <div className={getItemClass("ĐG quyền sử dụng đất")} onClick={() => handleClick("ĐG quyền sử dụng đất")}>
-            <Link href={`\auction-room`}>Phòng đấu giá</Link>
+            <Link href="/auction-room">Phòng đấu giá</Link>
           </div>
           <div className={getItemClass("Danh mục tài sản")} onClick={() => handleClick("Danh mục tài sản")}>
-            <Link href={`\asset-portfolio`}>Danh mục tài sản</Link>
+            <Link href="/asset-portfolio">Danh mục tài sản</Link>
           </div>
           <div className={getItemClass("Nạp tiền vào tài khoản")} onClick={() => handleClick("Nạp tiền vào tài khoản")}>
-            <Link href={`\pay`}>Nạp tiền vào tài khoản</Link>
+            <Link href="/pay">Nạp tiền vào tài khoản</Link>
           </div>
           <div className={getItemClass("Kết quả đấu giá")} onClick={() => handleClick("Kết quả đấu giá")}>
-            <Link href={`\auction-results`}>Kết quả đấu giá</Link>
+            <Link href="/auction-results">Kết quả đấu giá</Link>
           </div>
           <div
-            className="p-3.5 rounded-lg font-bold" // Thêm lớp font-bold
+            className={`${getItemClass("Phòng đấu giá của tôi")} p-3.5 rounded-lg font-bold`}
             style={{
               background: "linear-gradient(90deg, #c90000, #ff4848)",
               color: "white",
             }}
           >
-            <Link href="\accounts">Phòng đấu giá của tôi</Link>
+            <Link href="/accounts">Phòng đấu giá của tôi</Link>
           </div>
         </div>
       </div>

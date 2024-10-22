@@ -12,6 +12,7 @@
     "@ant-design/icons": "^5.5.1",
     "@nextui-org/react": "^2.4.8",
     "antd": "^5.21.1",
+    "axios": "^1.7.7",
     "canvas-confetti": "^1.9.3",
     "js-cookie": "^3.0.5",
     "next": "14.2.13",

@@ -15,7 +15,7 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ lists }) => {
   return (
-    <div className="flex justify-center flex-wrap gap-4 mt-10 ">
+    <div className="flex justify-center flex-wrap gap-4 mt-10  ">
       {lists.map((item) => (
         <div key={item.id} className="border p-4 rounded-md shadow-md w-[25%] h-[450px] flex flex-col justify-between">
           <div>

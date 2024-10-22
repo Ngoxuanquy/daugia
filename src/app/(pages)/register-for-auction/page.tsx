@@ -5,7 +5,7 @@ import { message } from "antd"; // Ensure import message from antd
 import fetchApi from "@/app/utils/api";
 import Cookies from "js-cookie";
 import { useLoading } from "@/app/layout";
-
+import axios from "axios";
 const RegisterForAuction = () => {
   // State declarations
   const { setLoading } = useLoading();
@@ -19,16 +19,35 @@ const RegisterForAuction = () => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
 
-  const handleImageChange = (event) => {
-    const selectedFile = event.target.files[0]; // Lấy tệp đầu tiên từ input
+  const handleImageChange = (event :any) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFile(reader.result); // Cập nhật state với hình ảnh đã đọc
-      };
-      reader.readAsDataURL(selectedFile); // Đọc tệp dưới dạng URL
-    }
+    reader.onload = () => {
+      setFile(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const uploadImage = async () => {
+    const CLOUD_NAME = "dvqmndx5j";
+    const PRESET_NAME = "upload";
+    const FOLDER_NAME = "banhang";
+    const api = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+    const formData = new FormData();
+    formData.append("upload_preset", PRESET_NAME);
+    formData.append("folder", FOLDER_NAME);
+
+    formData.append("file", file );
+
+    const res = await axios.post(api, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data.secure_url;
   };
 
   const handleRegister = async () => {
@@ -63,6 +82,8 @@ const RegisterForAuction = () => {
         return; // Dừng hàm nếu xác thực không thành công
       }
 
+      const imgages = await uploadImage();
+
       // Tạo đối tượng request body với dữ liệu đăng ký
       const requestBody = {
         userId: Cookies.get("userId"), // Lấy userId từ cookie
@@ -78,7 +99,7 @@ const RegisterForAuction = () => {
 
       // Nếu có file, gán nó vào request body
       if (file) {
-        requestBody.file = file; // Gán file đã được chuyển đổi vào requestBody
+        requestBody.file = imgages; // Gán file đã được chuyển đổi vào requestBody
       }
 
       // Gọi API với token trong headers
@@ -88,7 +109,7 @@ const RegisterForAuction = () => {
       if (response && response.metadata) {
         setLoading(false);
         message.success("Đăng ký thành công!"); // Hiển thị thông báo thành công
-        console.log("Response from API:", response); // Xử lý phản hồi nếu cần
+        window.location.href = "auction-room";
       } else {
         setLoading(false);
         message.error("Đăng ký thất bại, vui lòng thử lại."); // Hiển thị thông báo lỗi nếu không có metadata

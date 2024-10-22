@@ -161,21 +161,12 @@ const DetailAuction = () => {
       // Gửi request đến API kết thúc phiên đấu giá
       const response = await fetchApi(`/room/auction-end`, "POST", { roomId: id });
 
-      // Kiểm tra nếu phản hồi thành công
-      if (response.ok) {
-        const data = await response.json(); // Chuyển đổi phản hồi JSON
-        console.log("Auction ended successfully:", data);
-
-        alert("Phiên đấu giá đã kết thúc thành công!");
-      } else {
-        // Xử lý trường hợp API trả về lỗi nhưng không ném ngoại lệ
-        console.error("Failed to end auction:", response.statusText);
-        alert("Không thể kết thúc phiên đấu giá. Vui lòng thử lại.");
-      }
+      // Nếu request thành công, hiển thị thông báo thành công
+      message.success(response.message);
     } catch (error) {
-      // Xử lý các lỗi không mong muốn (như mạng, server lỗi)
+      // Xử lý lỗi, hiển thị thông báo lỗi nếu request không thành công
+      message.error("Kết thúc phiên đấu giá thất bại. Vui lòng thử lại.");
       console.error("Error ending auction:", error);
-      alert("Đã xảy ra lỗi khi kết thúc phiên đấu giá. Vui lòng thử lại sau.");
     }
   };
 
@@ -196,10 +187,12 @@ const DetailAuction = () => {
               <strong>Tiêu đề:</strong> <span className="text-[16px]">{auction.title}</span>
             </p>
             <p className="text-xl text-gray-600">
-              <strong>Giá khởi điểm:</strong> <span className="text-[16px]">{auction.startPrice.toLocaleString("vi-VN")} VNĐ</span>
+              <strong>Giá khởi điểm:</strong>{" "}
+              <span className="text-[16px]">{auction.startPrice.toLocaleString("vi-VN", { style: "currency", currency: "VND" })} </span>
             </p>
             <p className="text-xl text-gray-600">
-              <strong>Giá cao nhất:</strong> <span className="text-[16px]">{auction.currentPrice.toLocaleString("vi-VN")} VNĐ</span>
+              <strong>Giá cao nhất:</strong>{" "}
+              <span className="text-[16px]">{auction.currentPrice.toLocaleString("vi-VN", { style: "currency", currency: "VND" })} </span>
             </p>
 
             <p className="text-xl text-gray-600">
@@ -228,7 +221,7 @@ const DetailAuction = () => {
                   <strong>Thời gian còn lại:</strong>
                   <span className="text-red-500 text-[14px] text-red-600  ml-[4px]">{remainingEndTime}</span>
 
-                  {auction.user == Cookies.get("userId") && auction.status == "Đang diễn ra" ? (
+                  {auction.user == Cookies.get("userId") && auction.status === "Đang diễn ra" && remainingEndTime === "Đã kết thúc" ? (
                     <Button
                       style={{
                         marginLeft: "10px",
@@ -294,6 +287,7 @@ const DetailAuction = () => {
                 <table className="min-w-full border-collapse">
                   <thead>
                     <tr>
+                      <th className="border-b border-gray-300 p-4 text-left text-lg font-semibold text-gray-700">Mã user</th>
                       <th className="border-b border-gray-300 p-4 text-left text-lg font-semibold text-gray-700">Số tiền</th>
                       <th className="border-b border-gray-300 p-4 text-left text-lg font-semibold text-gray-700">Ngày</th>
                       <th className="border-b border-gray-300 p-4 text-left text-lg font-semibold text-gray-700">Trạng thái</th>
@@ -301,7 +295,7 @@ const DetailAuction = () => {
                   </thead>
                   <tbody>
                     {bidHistory
-                      .slice()
+                      ?.slice()
                       .reverse()
                       .map((bid, index) => (
                         <tr
@@ -310,6 +304,7 @@ const DetailAuction = () => {
                             bid.bidAmount !== auction.currentPrice ? "line-through text-red-500" : ""
                           }`}
                         >
+                          <td className="border-b border-gray-300 p-4 text-[14px] font-semibold text-gray-700">M-{bid.uid?.slice(-6)}</td>
                           <td className="border-b border-gray-300 p-4 text-[14px] font-semibold text-gray-700">
                             {bid.bidAmount.toLocaleString("vi-VN")} VNĐ
                           </td>

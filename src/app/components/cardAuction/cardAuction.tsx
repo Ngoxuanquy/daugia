@@ -1,14 +1,18 @@
 import Link from "next/link";
 import React from "react";
 
-const CardAuction = ({ auction }) => {
+const CardAuction = ({ auction }: any) => {
   const formatDate = (dateString: any) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     return new Date(dateString).toLocaleDateString("vi-VN", options);
   };
 
   return (
-    <div className="w-[450px] p-4">
+    <div className="w-[430px] p-4 ml-[20px]">
       <Link href={{ pathname: "/detail-auction", query: { id: auction._id } }}>
         <div key={auction._id} className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
           {auction.image && (
@@ -29,7 +33,8 @@ const CardAuction = ({ auction }) => {
           <p className="text-gray-700 mb-1">
             Ngày kết thúc: <span className="font-semibold">{formatDate(auction.endDate)}</span>
           </p>
-          <p className="text-gray-700 mb-4">Mô tả: {auction.description}</p>
+          <p className="text-gray-700 mb-4 truncate w-full">Mô tả: {auction.description}</p>
+
           <div className="text-center">
             <button className="bg-blue-500 text-white px-4 py-2 rounded-lg transition-colors hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
               Tham gia đấu giá
