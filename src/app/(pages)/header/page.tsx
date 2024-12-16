@@ -132,7 +132,7 @@ const Header = () => {
                 borderRadius: "50%",
                 objectFit: "cover",
               }}
-              src="https://scontent-hkg4-1.xx.fbcdn.net/v/t1.15752-9/462535391_3771330939745233_3099731095223746077_n.png?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFEq_DmVSp78A4AQglB4xlbre-MXs-el_2t74xez56X_eW1eOcL9xWGvBUQmkrW07WgjfDG0Xjt8wLJb1AFwCS7&_nc_ohc=bRwtkI4AZX4Q7kNvgEH3zgD&_nc_zt=23&_nc_ht=scontent-hkg4-1.xx&_nc_gid=A0x8nhjd0ZqykRE1_wVUwxa&oh=03_Q7cD1QFSBA9LTt5GMX6wXvgwMQcDbGmfJsGHB2oS6-oGDCSacg&oe=67398F29"
+              src='/logo.png'
             />
           </Link>
         </div>{" "}

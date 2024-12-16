@@ -47,6 +47,8 @@ const AuctionResults = () => {
 
     return textMatch && dateMatch && statusMatch;
   });
+  
+  console.log(listAuction)
 
   if (loading) return <div>Loading...</div>; // Loading state
 
@@ -114,21 +116,21 @@ const AuctionResults = () => {
               <td className="border-b px-4 py-2">{auction.title}</td>
               <td className="border-b px-4 py-2">{auction.roomCode}</td>
               <td className="border-b px-4 py-2">
-                {new Date(auction.startDate).toLocaleDateString("en-US", {
+                {new Date(auction.startDate).toLocaleDateString("vi-VN", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 })}{" "}
                 -{" "}
-                {new Date(auction.endDate).toLocaleDateString("en-US", {
+                {new Date(auction.endDate).toLocaleDateString("vi-VN", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 })}
               </td>
               <td className="border-b px-4 py-2">{auction.highestBidder}</td>
-              <td class="bg-green-500 text-white text-center rounded-lg w-32 h-9 mt-1 flex items-center justify-center">
-                {auction.status}
+              <td class="bg-green-500 text-white text-sm text-center rounded-lg w-32 h-9 mt-1 flex items-center justify-center">
+                {auction.bidHistory.length === 0 ? 'Đấu giá không thành' : auction.status}
               </td>
 
               <td className="border-b px-4 py-2">{auction.currentPrice} VNĐ</td>

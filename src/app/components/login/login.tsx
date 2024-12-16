@@ -57,12 +57,12 @@ const Login = ({ isModalOpen: initialIsModalOpen, onClose }: LoginProps) => {
           <div className="font-bold text-center mb-4 text-customRed text-[30px] ">Đăng Nhập</div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               value={email} // Liên kết với state
               onChange={(e) => setPhoneNumber(e.target.value)} // Cập nhật state khi nhập
               className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Nhập số điện thoại"
+              placeholder="Nhập Email"
             />
           </div>
 

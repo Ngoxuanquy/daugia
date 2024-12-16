@@ -162,7 +162,8 @@ const DetailAuction = () => {
       const response = await fetchApi(`/room/auction-end`, "POST", { roomId: id });
 
       // Nếu request thành công, hiển thị thông báo thành công
-      message.success(response.message);
+      message.success(response.metadata);
+      window.location.href = "http://localhost:3000/auction-room";
     } catch (error) {
       // Xử lý lỗi, hiển thị thông báo lỗi nếu request không thành công
       message.error("Kết thúc phiên đấu giá thất bại. Vui lòng thử lại.");

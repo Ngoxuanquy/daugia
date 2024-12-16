@@ -145,11 +145,11 @@ const Signup = () => {
         <div className="grid grid-cols-1 gap-4 mt-3">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Số điện thoại <span className="text-red-500">*</span>
+              Email <span className="text-red-500">*</span>
             </label>
             <input
-              name="phoneNumber"
-              value={formData.phoneNumber}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               className="mt-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -210,12 +210,12 @@ const Signup = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Email <span className="text-red-500">*</span>
+              Số điện thoại <span className="text-red-500">*</span>
             </label>
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
               onChange={handleChange}
               className="mt-1 w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />

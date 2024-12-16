@@ -1,7 +1,29 @@
 import { UserOutlined, BellOutlined, ShoppingCartOutlined, LoginOutlined, RadarChartOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import fetchApi from "@/app/utils/api";
 
 const CardUser = ({ onItemClick, activeColor }) => {
-  const name = "Trần Đại Hùng";
+  const [userInfo, setUserInfo] = useState({
+      fullName: "",
+    });
+
+    useEffect(() => {
+      const fetchUserData = async () => {
+        const userId = Cookies.get("userId");
+        const userResponse = await fetchApi(`/auth/getUser/${userId}`, "GET");
+  
+        console.log({ userResponse });
+  
+        // Kiểm tra phản hồi và thiết lập thông tin người dùng
+        if (userResponse && userResponse.metadata) {
+          const { fullName } = userResponse.metadata;
+          setUserInfo({ fullName });
+        }
+      };
+  
+      fetchUserData();
+    }, []);
 
   const handleClick = (label) => {
     if (onItemClick) {
@@ -15,10 +37,10 @@ const CardUser = ({ onItemClick, activeColor }) => {
         <img
           src="https://demoda.vn/wp-content/uploads/2022/03/hinh-nen-cute-mau-xanh-duong.jpg"
           alt="User Avatar"
-          className="w-16 h-16 rounded-full object-cover mr-4 mb-2"
+          className="w-16 h-16 rounded-full object-cover mb-2"
         />
-        <div>
-          <label className="text-lg font-semibold">{name}</label>
+        <div className="flex flex-col items-center">
+          <label className="text-lg font-semibold">{userInfo.fullName}</label>
           <div className="text-white bg-red-500 w-[120px] text-center items-center p-1 rounded mt-1">Thành viên</div>
         </div>
       </div>

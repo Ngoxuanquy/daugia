@@ -42,10 +42,18 @@ const AuctionRoom = () => {
           <h1 className="text-bold text-4xl mt-10 ">Phòng đấu giá</h1>
         </div>
       </div>
-      <div className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+      <div className="grid w-full grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-3 gap-5 ">
         {/* Vòng lặp qua các item trong listAuction và truyền từng item vào CardAuction */}
         {listAuction.length > 0 ? (
-          listAuction.map((auction, index) => <CardAuction key={index} auction={auction} />)
+          listAuction.map((auction, index) => 
+          (
+            <div style={{
+             width: '500px'
+            }}>
+              <CardAuction key={index} auction={auction} />
+              </div>
+          )
+          )
         ) : (
           <p className="text-center col-span-full">Không có tài sản nào để hiển thị.</p>
         )}

@@ -12,15 +12,16 @@ const Pay = () => {
   });
   const fetchUserData = async () => {
     const userId = Cookies.get("userId");
-    const userResponse = await fetchApi(`/auth/getUser/${userId}`, "GET");
-
-    console.log({ userResponse });
+    if(userId) {
+      const userResponse = await fetchApi(`/auth/getUser/${userId}`, "GET");
+      if (userResponse && userResponse.metadata) {
+        const { moneys } = userResponse.metadata;
+        setUserInfo({ moneys });
+      }
+    }
 
     // Kiểm tra phản hồi và thiết lập thông tin người dùng
-    if (userResponse && userResponse.metadata) {
-      const { moneys } = userResponse.metadata;
-      setUserInfo({ moneys });
-    }
+   
   };
   useEffect(() => {
     fetchUserData();

@@ -22,7 +22,7 @@ const fetchApi = async (endpoint: string, method: string = "GET", body: any = nu
 
   if (!response.ok) {
     const errorMessage = await response.text();
-    throw new Error(errorMessage); // Ném lỗi nếu không thành công
+    // throw new Error(errorMessage); // Ném lỗi nếu không thành công
   }
 
   return response.json(); // Trả về dữ liệu JSON nếu thành công
