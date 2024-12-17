@@ -55,6 +55,15 @@ const CardUser = ({ onItemClick, activeColor }) => {
           <UserOutlined className="mr-2" />
           <label>Thông tin tài khoản</label>
         </div>
+          <div
+          className={`h-[40px] flex items-center ${
+            activeColor === "Lịch sử đấu giá" ? "text-red-500" : "text-gray-900"
+          } hover:text-red-500 cursor-pointer`}
+          onClick={() => handleClick("Lịch sử đấu giá")}
+        >
+          <UserOutlined className="mr-2" />
+          <label>Lịch sử đấu giá</label>
+        </div>
         <div
           className={`h-[40px] flex items-center ${
             activeColor === "Thông báo" ? "text-red-500" : "text-gray-700"
