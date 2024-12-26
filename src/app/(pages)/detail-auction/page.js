@@ -163,7 +163,7 @@ const DetailAuction = () => {
 
       // Nếu request thành công, hiển thị thông báo thành công
       message.success(response.metadata);
-      window.location.href = "/auction-room";
+      // window.location.href = "/auction-room";
     } catch (error) {
       // Xử lý lỗi, hiển thị thông báo lỗi nếu request không thành công
       message.error("Kết thúc phiên đấu giá thất bại. Vui lòng thử lại.");
