@@ -27,13 +27,13 @@ const Pay = () => {
     fetchUserData();
   }, []);
 
-  const formatCurrency = (value: any) => {
+  const formatCurrency = (value) => {
     if (!value) return "";
     // Chuyển đổi giá trị thành số và định dạng thành chuỗi VNĐ
     return Number(value).toLocaleString("vi-VN", { style: "currency", currency: "VND" }).replace("₫", "").trim();
   };
 
-  const handleAmountChange = (e: any) => {
+  const handleAmountChange = (e) => {
     const rawValue = e.target.value;
     // Giữ lại các ký tự số và dấu phẩy
     const numericValue = rawValue.replace(/[^0-9]/g, ""); // Chỉ giữ số

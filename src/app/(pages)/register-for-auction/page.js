@@ -19,7 +19,7 @@ const RegisterForAuction = () => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
 
-  const handleImageChange = (event :any) => {
+  const handleImageChange = (event ) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 

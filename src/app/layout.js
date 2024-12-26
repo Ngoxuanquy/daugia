@@ -14,7 +14,7 @@ import { Spin } from "antd"; // Đảm bảo đường dẫn chính xác
 // Tạo context cho loading
 const LoadingContext = createContext({
   loading: false,
-  setLoading: (loading: boolean) => {},
+  setLoading: () => {},
 });
 
 export const useUser = () => {
@@ -25,7 +25,7 @@ export const useLoading = () => {
   return useContext(LoadingContext);
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   const [loading, setLoading] = useState(false);
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>

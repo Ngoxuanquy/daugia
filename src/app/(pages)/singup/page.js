@@ -29,7 +29,7 @@ const Signup = () => {
     agree2: false,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -103,7 +103,7 @@ const Signup = () => {
     console.log("Signup successful:", response);
   };
 
-  const handleChangeVerifyEmail = (value: any) => {
+  const handleChangeVerifyEmail = (value) => {
     setOtp(value.toUpperCase()); // Cập nhật giá trị OTP
   };
 

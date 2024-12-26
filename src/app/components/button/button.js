@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { Button } from "@nextui-org/react";
 import confetti from "canvas-confetti";
 
-const CustomButton = ({ onClick, className, disabled, children }) => {
+const CustomButton = ({ className, disabled, children }) => {
   const buttonRef = useRef(null); // Initialize buttonRef
 
   const handleConfetti = () => {

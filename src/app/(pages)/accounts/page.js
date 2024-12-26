@@ -11,11 +11,6 @@ const Accounts = () => {
 
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-   
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -47,12 +42,12 @@ const Accounts = () => {
 
     const userId = Cookies.get('userId')
 
-    const handleItemClick = (label: string) => {
+    const handleItemClick = (label) => {
         setActiveColor(label) // Cập nhật trạng thái activeColor
     }
 
     const handleUpdateUser = async () => {
-        await fetch(`http://localhost:3001/v1/api/auth/update`, {
+        await fetch(`http://18.140.54.125:3001/v1/api/auth/update`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +62,7 @@ const Accounts = () => {
         })
     }
 
-    const onChangeInput = (e) => {
+    const onChangeInput = (e ) => {
         setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
@@ -91,7 +86,7 @@ const Accounts = () => {
     const [loading, setLoading] = useState(true) // State for loading status
 
     const handleConfirm = async (roomId) => {
-         await fetch(`http://localhost:3001/v1/api/room/huy-hang`, {
+         await fetch(`http://18.140.54.125:3001/v1/api/room/huy-hang`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -143,7 +138,7 @@ const Accounts = () => {
     }
 
     const handleOk = async (values) => {
-        await fetch(`http://localhost:3001/v1/api/room/nhan-hang`, {
+        await fetch(`http://18.140.54.125:3001/v1/api/room/nhan-hang`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -216,7 +211,7 @@ const Accounts = () => {
                 </tr>
             </thead>
             <tbody>
-                {listRoomDone?.map((listRoom, index) => (
+                {listRoomDone?.map((listRoom) => (
                 <tr key={listRoom._id} className="hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">{listRoom.title}</td>
                     <td className="border border-gray-300 px-4 py-2">

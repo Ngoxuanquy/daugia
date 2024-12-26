@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React from "react";
 
-const CardAuction = ({ auction }: any) => {
-  const formatDate = (dateString: any) => {
-    const options: Intl.DateTimeFormatOptions = {
+const CardAuction = ({ auction }) => {
+  const formatDate = (dateString) => {
+    const options = {
       year: "numeric",
       month: "long",
       day: "numeric",
