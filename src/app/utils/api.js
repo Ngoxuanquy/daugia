@@ -1,7 +1,7 @@
 // utils/api.ts
 import Cookies from "js-cookie";
 
-const API_BASE_URL = "http://18.140.54.125:3001/v1/api"; // Thay đổi URL cơ sở của bạn
+const API_BASE_URL = "http://165.232.160.54:3001/v1/api"; // Thay đổi URL cơ sở của bạn
 
 const fetchApi = async (endpoint, method = "GET", body ) => {
   const token = Cookies.get("token"); // Lấy token từ cookie
