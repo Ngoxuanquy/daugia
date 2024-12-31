@@ -47,7 +47,7 @@ const Accounts = () => {
     }
 
     const handleUpdateUser = async () => {
-        await fetch(`http://165.232.160.54:3001/v1/api/auth/update`, {
+        await fetch(`https://daudau.site/api/auth/update`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const Accounts = () => {
     const [loading, setLoading] = useState(true) // State for loading status
 
     const handleConfirm = async (roomId) => {
-         await fetch(`http://165.232.160.54:3001/v1/api/room/huy-hang`, {
+         await fetch(`https://daudau.site/api/room/huy-hang`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ const Accounts = () => {
     }
 
     const handleOk = async (values) => {
-        await fetch(`http://165.232.160.54:3001/v1/api/room/nhan-hang`, {
+        await fetch(`https://daudau.site/api/room/nhan-hang`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
